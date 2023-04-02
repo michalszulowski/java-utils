@@ -32,7 +32,6 @@ class SizeRestrictedQueueTest {
 
     @Test
     public void testFullQueue() {
-        java.lang.annotation.Annotation
         givenQueue(2, new int[]{1, 2});
         thenQueueFullnessShouldBe(true);
     }
