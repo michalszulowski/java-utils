@@ -5,7 +5,7 @@ public class FloatComparator extends NumberToleranceComparator<Float> {
         super(relativeTolerance);
     }
 
-    public FloatComparator ofTolerance(double tolerance) {
+    public static FloatComparator ofTolerance(double tolerance) {
         return new FloatComparator(tolerance);
     }
 }
