@@ -1,10 +1,20 @@
 package time;
 
 public class Timer {
+    private long startTime;
+
     public static long measureTimeOf(Runnable task) {
-        long start = System.currentTimeMillis();
+        Timer timer = new Timer();
+        timer.start();
         task.run();
-        long stop = System.currentTimeMillis();
-        return stop - start;
+        return timer.getTime();
+    }
+
+    public void start() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public long getTime() {
+        return System.currentTimeMillis() - startTime;
     }
 }
