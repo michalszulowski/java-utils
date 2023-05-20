@@ -13,8 +13,14 @@ public class NumberToleranceComparator<N extends Number> implements Comparator<N
 
     @Override
     public int compare(N val1, N val2) {
-        val1ToVal2 = val1.doubleValue() /val2.doubleValue();
-        val2ToVal1 = val2.doubleValue() /val1.doubleValue();
+        if (val1 instanceof Long || val2 instanceof Long) {
+            throw new IllegalStateException("Longs comparison is not supported");
+        }
+        if (!areBothValuesNonNegative(val1, val2)) {
+            throw new IllegalArgumentException("Both values have to be non-negative");
+        }
+        val1ToVal2 = val1.doubleValue() / val2.doubleValue();
+        val2ToVal1 = val2.doubleValue() / val1.doubleValue();
         if (isVal1TooBig()) {
             return 1;
         }
@@ -22,6 +28,11 @@ public class NumberToleranceComparator<N extends Number> implements Comparator<N
             return -1;
         }
         return 0;
+    }
+
+    // TODO test
+    private boolean areBothValuesNonNegative(N val1, N val2) {
+        return val1.doubleValue() >= 0 && val2.doubleValue() >= 0;
     }
 
     private boolean isVal1TooBig() {

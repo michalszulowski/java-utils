@@ -39,6 +39,13 @@ class IntNumberToleranceComparatorTest {
         thenResultShouldBe(VAL1_BIGGER);
     }
 
+    @Test
+    public void testHugeInts() {
+        givenTolerance(1);
+        whenComparing(Integer.MAX_VALUE, Integer.MAX_VALUE - 1);
+        thenResultShouldBe(VAL1_BIGGER);
+    }
+
     private void givenTolerance(double tolerance) {
         comparator = new NumberToleranceComparator<>(tolerance);
     }
